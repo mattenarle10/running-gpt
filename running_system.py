@@ -26,7 +26,8 @@ if "chat" not in st.session_state:
     st.session_state.chat = model.start_chat(history = [])
 
 # Display Form Title
-st.title("Final Project in CCS 229 - Intelligent Systems")
+st.title("Run-GPT!")
+st.subheader("Final Project in CCS 229 - Intelligent Systems")
 st.subheader("Matthew Ariel A. Enarle - Section: BSCS 3-B AI")
 st.write("This project utilizes Google Generative AI's Gemini model for conversation, offering an alternative to paid services like OpenAI's API.")
 
