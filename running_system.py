@@ -1,36 +1,39 @@
-
 import streamlit as st
 import os
-
 import google.generativeai as genai
 
-
+# Set up Google API key for generative AI
 GOOGLE_API_KEY = "AIzaSyA9N2njOTvyKLi8_dF2lptU4uMWUEuB6dg"
 api_key = os.getenv('GOOGLE_API_KEY', GOOGLE_API_KEY)
-
-
 genai.configure(api_key=GOOGLE_API_KEY)
-
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-
-# Gemini uses 'model' for assistant; Streamlit uses 'assistant'
+# Function to map model roles to Streamlit roles
 def role_to_streamlit(role):
-  if role == "model":
-    return "assistant"
-  else:
-    return role
+    if role == "model":
+        return "assistant"
+    else:
+        return role
 
-# Add a Gemini Chat history object to Streamlit session state
+# Initialize chat history in session state
 if "chat" not in st.session_state:
-    st.session_state.chat = model.start_chat(history = [])
+    st.session_state.chat = model.start_chat(history=[])
 
-# Display Form Title
-st.title("Run-GPT!")
+# Add app logo at the top
+st.image("images/logo.png", width=200)  # Adjust the width as needed
+
+# Create two columns for logo and title
+col1, col2 = st.columns([1, 3])
+with col1:
+    st.image("images/logo.png", width=50)  # Adjust the width as needed
+
+with col2:
+    st.title("Run-GPT!")
+
+# Display additional information
 st.subheader("Final Project in CCS 229 - Intelligent Systems")
 st.subheader("Matthew Ariel A. Enarle - Section: BSCS 3-B AI")
 st.write("This project utilizes Google Generative AI's Gemini model for conversation, offering an alternative to paid services like OpenAI's API.")
-
 
 # Display chat messages from history above current input box
 for message in st.session_state.chat.history:
@@ -42,10 +45,9 @@ if prompt := st.chat_input("Ask me any questions about Running!"):
     # Display user's last message
     st.chat_message("user").markdown(prompt)
 
-    # Send user entry to Gemini and read the  response
+    # Send user entry to Gemini and read the response
     response = st.session_state.chat.send_message(prompt)
 
-    # Display last
+    # Display assistant's response
     with st.chat_message("assistant"):
         st.markdown(response.text)
-
