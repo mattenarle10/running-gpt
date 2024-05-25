@@ -33,20 +33,6 @@ prompts = [
 # Create a scrollable container for chat messages
 chat_container = st.container()
 
-# Set custom CSS to make the chat container scrollable
-st.markdown(
-    """
-    <style>
-    .chat-container {
-        height: 400px;
-        overflow-y: auto;
-        padding-right: 15px; /* Prevents hiding content behind scrollbar */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
 # Display chat messages from history above current input box
 with chat_container:
     st.write('<div class="chat-container">', unsafe_allow_html=True)
