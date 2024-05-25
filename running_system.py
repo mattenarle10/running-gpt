@@ -25,7 +25,7 @@ if "chat" not in st.session_state:
 st.image("images/logo.png", width=200)  # Adjust the width as needed
 
 
-    st.title("Run-GPT!")
+st.title("Run-GPT!")
 
 # Display additional information
 st.subheader("Final Project in CCS 229 - Intelligent Systems")
