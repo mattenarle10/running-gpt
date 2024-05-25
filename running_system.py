@@ -55,7 +55,6 @@ st.markdown('<div class="scrollable-chat">', unsafe_allow_html=True)
 for message in st.session_state.chat.history:
     with st.chat_message(role_to_streamlit(message.role)):
         st.markdown(message.parts[0].text)
-st.markdown('</div>', unsafe_allow_html=True)
 
 # Accept user's next message, add to context, resubmit context to Gemini
 if prompt := st.chat_input("I can help you create a personalized running plan. Ask me Questions!"):
@@ -71,3 +70,4 @@ if prompt := st.chat_input("I can help you create a personalized running plan. A
     # Display the last response
     with st.chat_message("assistant"):
         st.markdown(response.text)
+st.markdown('</div>', unsafe_allow_html=True)
