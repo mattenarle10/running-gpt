@@ -17,24 +17,28 @@ def role_to_streamlit(role):
 
 if "chat" not in st.session_state:
     st.session_state.chat = model.start_chat(history=[])
+    st.session_state.level = 0
 
-# Set custom CSS to make the header fixed and the chat container scrollable
+st.title("Final Project in CCS 229 - Intelligent Systems")
+st.subheader("Matthew Ariel A. Enarle - Section: BSCS 3-B AI")
+st.write("This project utilizes Google Generative AI's Gemini model for conversation, offering an alternative to paid services like OpenAI's API.")
+
+# Define the multi-level prompts
+prompts = [
+    "What is your current running experience (e.g., beginner, intermediate, advanced)?",
+    "What are your running goals (e.g., distance, speed, health)?",
+    "I can help you create a personalized running plan. Ask me Questions!"
+]
+
+# Create a scrollable container for chat messages
+chat_container = st.container()
+
+# Set custom CSS to make the chat container scrollable
 st.markdown(
     """
     <style>
-    .fixed-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: white;
-        z-index: 1000;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-    .scrollable-chat {
-        margin-top: 150px; /* Adjust based on header height */
-        height: calc(100vh - 200px); /* Adjust based on header/footer height */
+    .chat-container {
+        height: 400px;
         overflow-y: auto;
         padding-right: 15px; /* Prevents hiding content behind scrollbar */
     }
@@ -43,22 +47,18 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Fixed header
-st.markdown('<div class="fixed-header">', unsafe_allow_html=True)
-st.title("Final Project in CCS 229 - Intelligent Systems")
-st.subheader("Matthew Ariel A. Enarle - Section: BSCS 3-B AI")
-st.write("This project utilizes Google Generative AI's Gemini model for conversation, offering an alternative to paid services like OpenAI's API.")
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Create a scrollable container for chat messages
-st.markdown('<div class="scrollable-chat">', unsafe_allow_html=True)
-with st.container():
+# Display chat messages from history above current input box
+with chat_container:
+    st.write('<div class="chat-container">', unsafe_allow_html=True)
     for message in st.session_state.chat.history:
         with st.chat_message(role_to_streamlit(message.role)):
             st.markdown(message.parts[0].text)
+    st.write('</div>', unsafe_allow_html=True)
 
-    # Accept user's next message, add to context, resubmit context to Gemini
-    if prompt := st.chat_input("I can help you create a personalized running plan. Ask me Questions!"):
+# Accept user's next message, add to context, resubmit context to Gemini
+if st.session_state.level < len(prompts):
+    current_prompt = prompts[st.session_state.level]
+    if prompt := st.chat_input(current_prompt):
         # Display user's last message
         st.chat_message("user").markdown(prompt)
 
@@ -71,4 +71,20 @@ with st.container():
         # Display the last response
         with st.chat_message("assistant"):
             st.markdown(response.text)
-st.markdown('</div>', unsafe_allow_html=True)
+
+        # Move to the next level
+        st.session_state.level += 1
+else:
+    if prompt := st.chat_input(prompts[-1]):
+        # Display user's last message
+        st.chat_message("user").markdown(prompt)
+
+        # Send user entry to Gemini and read the response
+        response = st.session_state.chat.send_message(prompt)
+
+        # Add the new message to the chat history
+        st.session_state.chat.history.append(response)
+
+        # Display the last response
+        with st.chat_message("assistant"):
+            st.markdown(response.text)
