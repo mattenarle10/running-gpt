@@ -18,7 +18,7 @@ def role_to_streamlit(role):
 if "chat" not in st.session_state:
     st.session_state.chat = model.start_chat(history=[])
 
-# Set custom CSS to make the chat container scrollable
+# Set custom CSS to make the header fixed and the chat container scrollable
 st.markdown(
     """
     <style>
@@ -52,22 +52,23 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # Create a scrollable container for chat messages
 st.markdown('<div class="scrollable-chat">', unsafe_allow_html=True)
-for message in st.session_state.chat.history:
-    with st.chat_message(role_to_streamlit(message.role)):
-        st.markdown(message.parts[0].text)
+with st.container():
+    for message in st.session_state.chat.history:
+        with st.chat_message(role_to_streamlit(message.role)):
+            st.markdown(message.parts[0].text)
 
-# Accept user's next message, add to context, resubmit context to Gemini
-if prompt := st.chat_input("I can help you create a personalized running plan. Ask me Questions!"):
-    # Display user's last message
-    st.chat_message("user").markdown(prompt)
+    # Accept user's next message, add to context, resubmit context to Gemini
+    if prompt := st.chat_input("I can help you create a personalized running plan. Ask me Questions!"):
+        # Display user's last message
+        st.chat_message("user").markdown(prompt)
 
-    # Send user entry to Gemini and read the response
-    response = st.session_state.chat.send_message(prompt)
+        # Send user entry to Gemini and read the response
+        response = st.session_state.chat.send_message(prompt)
 
-    # Add the new message to the chat history
-    st.session_state.chat.history.append(response)
+        # Add the new message to the chat history
+        st.session_state.chat.history.append(response)
 
-    # Display the last response
-    with st.chat_message("assistant"):
-        st.markdown(response.text)
+        # Display the last response
+        with st.chat_message("assistant"):
+            st.markdown(response.text)
 st.markdown('</div>', unsafe_allow_html=True)
