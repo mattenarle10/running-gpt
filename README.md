@@ -1,6 +1,6 @@
 ## 🏃 Run-GPT: A Streamlit App for Interactive Conversation with Gemini by Matt E.
 
-**Run GPT** is a web app built with Streamlit that allows you to have interactive conversations using Google Generative AI's powerful Gemini model.  This project provides a user-friendly interface for exploring the capabilities of large language models for free, offering an alternative to paid services!  
+**Run GPT** is a web app built with Streamlit that allows you to have interactive conversations about running using Google Generative AI's powerful Gemini model.  This project provides a user-friendly interface for exploring the capabilities of large language models for free, offering an alternative to paid services!  
 
 **Features:**
 
@@ -28,10 +28,11 @@ The code is well-structured, utilizing Streamlit components for a user-friendly 
 **Customization:**
 
 * Feel free to modify the app's title, logo, and descriptions to personalize your experience.
-* Explore Streamlit's documentation for further customization options!  [https://docs.streamlit.io/](https://docs.streamlit.io/)
+* Try to explore streamlit
 
 **Project by:**
 
 * Matthew Ariel A. Enarle - Section: BSCS 3-B AI
+* All thanks and credits goes to Prof. Louie Cervantes for teaching us! Thank you Sir
 
 **This project serves as a final project for CCS 229 - Intelligent Systems.**
