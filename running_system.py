@@ -8,6 +8,8 @@ api_key = os.getenv('GOOGLE_API_KEY', GOOGLE_API_KEY)
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
+st.set_page_config(page_title="Run-GPT", page_icon="images/logo.png")
+
 # Function to map model roles to Streamlit roles
 def role_to_streamlit(role):
     if role == "model":
@@ -22,12 +24,7 @@ if "chat" not in st.session_state:
 # Add app logo at the top
 st.image("images/logo.png", width=200)  # Adjust the width as needed
 
-# Create two columns for logo and title
-col1, col2 = st.columns([1, 3])
-with col1:
-    st.image("images/logo.png", width=50)  # Adjust the width as needed
 
-with col2:
     st.title("Run-GPT!")
 
 # Display additional information
