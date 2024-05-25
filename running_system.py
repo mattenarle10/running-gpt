@@ -18,19 +18,23 @@ def role_to_streamlit(role):
 if "chat" not in st.session_state:
     st.session_state.chat = model.start_chat(history=[])
 
-st.title("Final Project in CCS 229 - Intelligent Systems")
-st.subheader("Matthew Ariel A. Enarle - Section: BSCS 3-B AI")
-st.write("This project utilizes Google Generative AI's Gemini model for conversation, offering an alternative to paid services like OpenAI's API.")
-
-# Create a scrollable container for chat messages
-chat_container = st.container()
-
 # Set custom CSS to make the chat container scrollable
 st.markdown(
     """
     <style>
-    .chat-container {
-        height: 400px;
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        z-index: 1000;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .scrollable-chat {
+        margin-top: 150px; /* Adjust based on header height */
+        height: calc(100vh - 200px); /* Adjust based on header/footer height */
         overflow-y: auto;
         padding-right: 15px; /* Prevents hiding content behind scrollbar */
     }
@@ -39,13 +43,19 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Display chat messages from history above current input box
-with chat_container:
-    st.write('<div class="chat-container">', unsafe_allow_html=True)
-    for message in st.session_state.chat.history:
-        with st.chat_message(role_to_streamlit(message.role)):
-            st.markdown(message.parts[0].text)
-    st.write('</div>', unsafe_allow_html=True)
+# Fixed header
+st.markdown('<div class="fixed-header">', unsafe_allow_html=True)
+st.title("Final Project in CCS 229 - Intelligent Systems")
+st.subheader("Matthew Ariel A. Enarle - Section: BSCS 3-B AI")
+st.write("This project utilizes Google Generative AI's Gemini model for conversation, offering an alternative to paid services like OpenAI's API.")
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Create a scrollable container for chat messages
+st.markdown('<div class="scrollable-chat">', unsafe_allow_html=True)
+for message in st.session_state.chat.history:
+    with st.chat_message(role_to_streamlit(message.role)):
+        st.markdown(message.parts[0].text)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Accept user's next message, add to context, resubmit context to Gemini
 if prompt := st.chat_input("I can help you create a personalized running plan. Ask me Questions!"):
