@@ -2,7 +2,7 @@
 
 **Run GPT** is a web app built with Streamlit that allows you to have interactive conversations about running using Google Generative AI's powerful Gemini model.  This project provides a user-friendly interface for exploring the capabilities of large language models for free, offering an alternative to paid services!  
 
-**Project by:**
+***Project by:***
 
 * Matthew Ariel A. Enarle - Section: BSCS 3-B AI
 * All thanks and credits goes to Prof. Louie Cervantes for teaching us! Thank you Sir
