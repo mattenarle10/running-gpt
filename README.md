@@ -4,8 +4,8 @@
 
 ***Project by:***
 
-* Matthew Ariel A. Enarle - Section: BSCS 3-B AI
-* All thanks and credits goes to Prof. Louie Cervantes for teaching us! Thank you Sir
+**** Matthew Ariel A. Enarle - Section: BSCS 3-B AI ****
+**** All thanks and credits goes to Prof. Louie Cervantes for teaching us! Thank you Sir ****
 
 **Features:**
 
