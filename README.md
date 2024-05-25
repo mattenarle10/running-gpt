@@ -8,13 +8,6 @@
 * **Streamlit Integration:** Built with Streamlit for a smooth and responsive user experience. ⚡
 * **Gemini Model Power:** Leverages the capabilities of Google Generative AI's Gemini model for high-quality text generation.
 
-**Getting Started / How to if u want to try!:**
-
-1. Clone this repository.
-2. Install required dependencies: `pip install streamlit google-generativeai` (ensure you have a Google Cloud project with the Generative AI API enabled).
-3. Set your Google API key as an environment variable named `GOOGLE_API_KEY`. (You can find your API key in the Google Cloud Console)
-4. Run the app: `streamlit run app.py`
-
 **Code Structure:**
 
 The code is well-structured, utilizing Streamlit components for a user-friendly interface. Key elements include:
