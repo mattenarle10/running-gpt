@@ -38,7 +38,7 @@ for message in st.session_state.chat.history:
         st.markdown(message.parts[0].text)
 
 # Accept user's next message, add to context, resubmit context to Gemini
-if prompt := st.chat_input("I possess a well of knowledge. What would you like to know?"):
+if prompt := st.chat_input("Ask me any questions about Running!"):
     # Display user's last message
     st.chat_message("user").markdown(prompt)
 
